@@ -7,8 +7,8 @@ _Instalação do Sistema:_
 1. Rode: npm install 
 2. Rode: npm run start
 3. Ajuste os parâmetro do MySql ou PostgreSql no .env
-4. Inserir o sql no workbench do banco para a criação da tabela e inserção de dados na mesma.
-5. Inserir a url no postman para realização da requisição http (get)
+4. Inserir o sql no workbench do banco para a criação da tabela e inserção de dados na mesma
+5. Inserir a url nas ferramentas de tratamento de requisições HTTP de sua escolha
 6. Rode: npm test (para rodar o teste unitário do controller, caso necessário)
 
 _Ferramentas utilizadas:_
@@ -20,7 +20,7 @@ _Ferramentas utilizadas:_
 - `dotenv`
 - `postman`
 
-_Aqui esta a url para a requisição no postman:_ 
+_Aqui esta a url para a requisição GET:_ 
 # GET /damage-summary-by-date?dateStart=2013-12-17&dateEnd=2014-01-09
 
 _Aqui esta o SQL para a criação da tabela e inserção de dados na mesma no banco de dados:_
