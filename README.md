@@ -27,11 +27,11 @@ _Aqui esta o SQL para a criação da tabela e inserção de dados na mesma no ba
 # Criação da table:
 
 CREATE TABLE alerts (
-  id_repository INT NOT NULL AUTO_INCREMENT,
+  id INT NOT NULL AUTO_INCREMENT,
   date VARCHAR(255) NOT NULL,
   event VARCHAR(255) NOT NULL,
   damage INT NOT NULL,
-  PRIMARY KEY (id_repository)
+  PRIMARY KEY (id)
 );
 
 # Inserção de dados:
