@@ -9,6 +9,7 @@ _Instalação do Sistema:_
 3. Ajuste os parâmetro do MySql ou PostgreSql no .env
 4. Inserir o sql no workbench do banco para a criação da tabela e inserção de dados na mesma.
 5. Inserir a url no postman para realização da requisição http (get)
+6. Rode: npm test (para rodar o teste unitário do controller)
 
 _Ferramentas utilizadas:_
 - `VScode` 
