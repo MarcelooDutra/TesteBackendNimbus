@@ -1,4 +1,4 @@
-const controller = require("./controller");
+const controller = require("../controllers/controller");
 const url = require('url');
 
 module.exports = {

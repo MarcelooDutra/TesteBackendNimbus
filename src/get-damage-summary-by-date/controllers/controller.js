@@ -1,4 +1,4 @@
-const repository = require("./repository");
+const repository = require("../database/repository");
 
 module.exports = {
   async execute(dateStart, dateEnd) {

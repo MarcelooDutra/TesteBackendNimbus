@@ -1,87 +1,76 @@
-## Teste técnico para Backend da Nimbus
+# **Instruções**
 
-### Cenário
+## Teste técnico Backend Nimbus.
 
-A Nimbus foi contratada para gerir alertas baseados na previsão climática de uma região. O alerta deve informar o evento (quantidade de chuva ou velocidade do vento, por exemplo) e o nível do impacto do evento na operação da contratante nessa região.
+_Instalação do Sistema:_
 
-Abaixo será descrito um dos casos de uso da aplicação que devemos desenvolver.
+1. Rode: npm install 
+2. Rode: npm run start
+3. Ajuste os parâmetro do MySql ou PostgreSql no .env
+4. Inserir o sql no workbench do banco para a criação da tabela e inserção de dados na mesma.
+5. Inserir a url no postman para realização da requisição http (get)
 
-### Descrição do Caso de Uso `GetDamageSummaryByDate`
+_Ferramentas utilizadas:_
+- `VScode` 
+- `Node.js` 
+- `Mysql2` 
+- `jest`
+- `nodemon`
+- `dotenv`
+- `postman`
 
-A cada quinzena, a contratante fará um relatório com um resumo diário de impactos na região. Nesse resumo deve constar, para cada dia:
-- Média de impacto na operação
-- Evento de maior impacto
-- Evento de menor impacto
+_Aqui esta a url para a requisição no postman:_ 
+# GET /damage-summary-by-date?dateStart=2013-12-17&dateEnd=2014-01-09
 
-Sendo assim, deve-se disponibilizar um endpoint na nossa aplicação que retorne essas informações baseadas em todos os eventos ocorridos dentro de um período estipulado. Esse resultado deve ser ordenado por data em ordem decrescente.
+_Aqui esta o SQL para a criação da tabela e inserção de dados na mesma no banco de dados:_
 
-Exemplo da requisição:
+# Criação da table:
 
-`GET /damage-summary-by-date?dateStart=dateStart=2023-12-22&dateEnd=2024-01-05`
+CREATE TABLE alerts (
+  id_repository INT NOT NULL AUTO_INCREMENT,
+  date VARCHAR(255) NOT NULL,
+  event VARCHAR(255) NOT NULL,
+  damage INT NOT NULL,
+  PRIMARY KEY (id_repository)
+);
 
-Resposta:
+# Inserção de dados:
 
-```json
-{
-    "data": [
-        {
-            "date": "2024-01-05",
-            "avgDamage": 68,
-            "maxDamageEvent": {
-                "event": "Pancada de chuva",
-                "damage": 82
-            },
-            "minDamageEvent": {
-                "event": "Chuva 12 mm",
-                "damage": 59
-            }
-        },
-        {
-            "date": "2024-01-04",
-            "avgDamage": 58,
-            "maxDamageEvent": {
-                "event": "Vento 9 m/s",
-                "damage": 73
-            },
-            "minDamageEvent": {
-                "event": "Ocorrência de raios a 17 km",
-                "damage": 48
-            }
-        },
-        {
-            "date": "2024-01-03",
-            "avgDamage": 0,
-            "maxDamageEvent": null,
-            "minDamageEvent": null
-        },
-        ...
-    ]
-}
-
-```
-
-### Instruções
-
-Uma pessoa na equipe criou a regra de negócio para o caso de uso. Porém, há bugs na implementação.
-
-Sua função é:
-- Implementar o endpoint para o caso de uso
-- Corrigir os bugs na regra de negócio
-
-Na pasta do projeto estão disponíveis arquivos de base para a implementação. O arquivo `src/get-damage-summary-by-date/controller.js` possui o código da regra de negócio, e o arquivo `src/get-damage-summary-by-date/controller.test.js` deve ser utilizado para criar os testes unitários da regra.
-
-Não há obrigatoriedade de uso de ferramentas específicas, mas você deve utilizar ferramentas (à sua escolha) para os seguintes módulos:
-- Tratamento de requisições http
-- Acesso e criação do banco de dados
-- Testes unitários
-
-No arquivo `data/alerts.json` está uma lista de alertas para utilizar como teste. Crie a tabela de alertas, de acordo com o formato das entidades presentes no arquivo, e preencha com esses alertas. Deve-se disponibilizar, junto à solução, todos os arquivos e códigos necessários para o setup do banco de dados.
-
-O arquivo `src/get-damage-summary-by-date/request.http` possui um exemplo de requisição que será feita para o endpoint que será implementado.
-
-### Atenção!
-
-Quem vai revisar a solução deve rodar, no MÁXIMO, 3 comandos para testar a solução em um primeiro momento:
-- Setup do banco de dados
-- Rodar a aplicação (npm install && npm start)
-- Executar a requisição para o endpoint
+INSERT INTO alerts (date, event, damage) VALUES
+    ('2013-12-17', 'Chuva 10 mm', 35),
+    ('2013-12-17', 'Vento 12 m/s', 87),
+    ('2013-12-17', 'Ocorrência de raios a 20 km', 51),
+    ('2013-12-18', 'Temperatura acima de 40°C', 72),
+    ('2013-12-18', 'Pancada de chuva forte', 93),
+    ('2013-12-19', 'Chuva 6 mm', 23),
+    ('2013-12-19', 'Vento 6 m/s', 53),
+    ('2013-12-20', 'Rajada acima de 30 m/s', 65),
+    ('2013-12-21', 'Pancada de chuva', 71),
+    ('2013-12-21', 'Temperatura acima de 35°C', 62),
+    ('2013-12-22', 'Chuva 12 mm', 63),
+    ('2013-12-22', 'Vento 8 m/s', 68),
+    ('2013-12-24', 'Rajada acima de 25 m/s', 52),
+    ('2013-12-24', 'Ocorrência de raios a 5 km', 96),
+    ('2013-12-24', 'Temperatura acima de 42°C', 85),
+    ('2013-12-26', 'Chuva 3 mm', 15),
+    ('2013-12-26', 'Vento 10 m/s', 73),
+    ('2013-12-27', 'Pancada de chuva forte', 91),
+    ('2013-12-27', 'Rajada acima de 32 m/s', 82),
+    ('2013-12-28', 'Temperatura acima de 37°C', 65),
+    ('2013-12-28', 'Chuva 3 mm', 13),
+    ('2013-12-29', 'Vento 6 m/s', 56),
+    ('2013-12-30', 'Ocorrência de raios a 12 km', 42),
+    ('2013-12-30', 'Pancada de chuva forte', 90),
+    ('2013-12-31', 'Temperatura acima de 39°C', 69),
+    ('2013-12-31', 'Chuva 11 mm', 42),
+    ('2014-01-04', 'Vento 9 m/s', 73),
+    ('2014-01-04', 'Ocorrência de raios a 17 km', 48),
+    ('2014-01-04', 'Rajada acima de 23 m/s', 51),
+    ('2014-01-05', 'Temperatura acima de 36°C', 63),
+    ('2014-01-05', 'Chuva 12 mm', 59),
+    ('2014-01-05', 'Vento 8 m/s', 68),
+    ('2014-01-05', 'Pancada de chuva', 82),
+    ('2014-01-07', 'Rajada acima de 29 m/s', 61),
+    ('2014-01-08', 'Ocorrência de raios a 30 km', 32),
+    ('2014-01-08', 'Chuva 5 mm', 23),
+    ('2014-01-09', 'Vento 10 m/s', 75);

@@ -1,6 +1,6 @@
 const http = require("http");
 
-const getDamageSummaryByDateRoute = require("./get-damage-summary-by-date/route");
+const getDamageSummaryByDateRoute = require("../routes/route");
 
 const server = http.createServer((req, res) => {
   const adjustedUrl = req.url.split("?")[0]
